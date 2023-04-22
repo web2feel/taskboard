@@ -1,8 +1,9 @@
-import React from "react";
 import TaskItem from "./TaskItem";
-
-const TaskColumn = ({ category, taskData, setTaskdata }) => {
-  let data = taskData.tasks.filter((item) => item.category === category);
+import { useContext } from "react";
+import { AppContext } from "../context/AppContext";
+const TaskColumn = ({ category }) => {
+  const { state, dispatch } = useContext(AppContext);
+  let data = state.tasks.filter((item) => item.category === category);
   return (
     <div className="taskColumn">
       <div className="columnHeader">
@@ -14,8 +15,8 @@ const TaskColumn = ({ category, taskData, setTaskdata }) => {
             <TaskItem
               key={item.id}
               item={item}
-              taskData={taskData}
-              setTaskdata={setTaskdata}
+              dispatch={dispatch}
+              categories={state.categories}
             />
           );
         })}
